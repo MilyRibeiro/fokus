@@ -4,26 +4,34 @@ const botaoDescansoCurto = document.querySelector('.app__card-button--curto');
 const botaoDescansoLongo = document.querySelector('.app__card-button--longo');
 const imagem = document.querySelector('.app__image');
 const titulo = document.querySelector('.app__title');
+const botoes = document.querySelectorAll('.app__card-button');
 
 botaoFoco.addEventListener('click', () => {
     // html.setAttribute('data-contexto', 'foco');
     // imagem.setAttribute('src', './imagens/foco.png');
-    alterarContexto('foco')
+    alterarContexto('foco');
+    botaoFoco.classList.add('active');
 });
 
 botaoDescansoCurto.addEventListener('click', () => {
     // html.setAttribute('data-contexto', 'descanso-curto');
     // imagem.setAttribute('src', './imagens/descanso-curto.png');
     alterarContexto('descanso-curto');
+    botaoDescansoCurto.classList.add('active');
 });
 
 botaoDescansoLongo.addEventListener('click', () => {
     // html.setAttribute('data-contexto', 'descanso-longo');
     // imagem.setAttribute('src', './imagens/descanso-longo.png');
     alterarContexto('descanso-longo');
+    botaoDescansoLongo.classList.add('active');
 });
 
 function alterarContexto(contexto) {
+    botoes.forEach(function (contexto) {
+        contexto.classList.remove('active');
+    });
+
     html.setAttribute('data-contexto', contexto);
     imagem.setAttribute('src', `./imagens/${contexto}.png`);
     switch (contexto) {
