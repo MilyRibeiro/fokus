@@ -5,6 +5,17 @@ const botaoDescansoLongo = document.querySelector('.app__card-button--longo');
 const imagem = document.querySelector('.app__image');
 const titulo = document.querySelector('.app__title');
 const botoes = document.querySelectorAll('.app__card-button');
+const musicaFocoInput = document.getElementById('alternar-musica');
+const musica = new Audio('./sons/luna-rise-part-one.mp3');
+musica.loop = true;
+
+musicaFocoInput.addEventListener('change', () => {
+    if(musica.paused) {
+        musica.play();
+    } else {
+        musica.pause();
+    };
+});
 
 botaoFoco.addEventListener('click', () => {
     // html.setAttribute('data-contexto', 'foco');
