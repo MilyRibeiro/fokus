@@ -5,6 +5,17 @@ const campoDeTexto = document.querySelector('.app__form-textarea');
 const ulTarefas = document.querySelector('.app__section-task-list');
 // const tarefas = [];
 const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+const botaoCancelar = document.querySelector('.app__form-footer__button--cancel');
+
+function atualizarTarefas() {
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+};
+
+// Função para limpar o conteúdo do textarea e esconder o formulário:
+const limparFormulario = () => {
+    campoDeTexto.value = '';  // Limpa o conteúdo do textarea
+    formularioAdicionarTarefa.classList.add('hidden');  // Adiciona a classe 'hidden' ao formulário para escondê-lo
+};
 
 function criarElementoTarefa(tarefa) {
     const li = document.createElement('li');
@@ -23,6 +34,18 @@ function criarElementoTarefa(tarefa) {
 
     const botao = document.createElement('button');
     botao.classList.add('app_button-edit');
+
+    botao.onclick = () => {
+        // debugger;
+        const novaDescricao = prompt('Qual é o novo nome da tarefa?');
+        console.log('Nova descrição da tarefa: ', novaDescricao);
+        if(novaDescricao) {
+            paragrafo.textContent = novaDescricao;  // atualizamos a camada visual
+            tarefa.descricao = novaDescricao;  // atualizamos a referência da tarefa, que é a camada de dados
+            atualizarTarefas();   // e fizemos o update na localStorage, então quando atualizar a página, as tarefas permanecerão modificadas
+        };  // assim, uma string vazia e um nulo (cancelar) como FALSE
+    };
+
     const imagemDoBotao = document.createElement('img');
     imagemDoBotao.setAttribute('src', './imagens/edit.png');
 
@@ -46,7 +69,8 @@ formularioAdicionarTarefa.addEventListener('submit', (evento) => {
     tarefas.push(tarefa);
     const elementoTarefa = criarElementoTarefa(tarefa);
     ulTarefas.append(elementoTarefa);
-    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+    // localStorage.setItem('tarefas', JSON.stringify(tarefas));
+    atualizarTarefas();
     campoDeTexto.value = '';
     formularioAdicionarTarefa.classList.add('hidden');
 });
@@ -54,4 +78,7 @@ formularioAdicionarTarefa.addEventListener('submit', (evento) => {
 tarefas.forEach(tarefa => {
     const elementoTarefa = criarElementoTarefa(tarefa);
     ulTarefas.append(elementoTarefa);
-})
+});
+
+// Associa a função limparFormulario ao evento de clique do botão Cancelar:
+botaoCancelar.addEventListener('click', limparFormulario);
