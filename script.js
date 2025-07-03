@@ -14,7 +14,7 @@ const audioTempoFinalizado= new Audio('./sons/beep.mp3');
 const botaoIniciarOuPausar = document.querySelector('#start-pause span');
 const iconePlayEPause = document.querySelector('.app__card-primary-button-icon');
 const tempoNaTela = document.getElementById('timer');
-let tempoDecorridoEmSegundos = 30;
+let tempoDecorridoEmSegundos = 5;
 let intervaloId = null;
 
 musica.loop = true;
@@ -30,7 +30,7 @@ musicaFocoInput.addEventListener('change', () => {
 botaoFoco.addEventListener('click', () => {
     // html.setAttribute('data-contexto', 'foco');
     // imagem.setAttribute('src', './imagens/foco.png');
-    tempoDecorridoEmSegundos = 30;
+    tempoDecorridoEmSegundos = 5;
     alterarContexto('foco');
     botaoFoco.classList.add('active');
 });
